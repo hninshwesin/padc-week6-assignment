@@ -4,14 +4,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'is_published', 'author_id'];
+    use Searchable;
+    protected $fillable = ['title', 'content', 'is_published', 'author_id','category_id'];
+
+    protected $casts = [
+      'is_published' => 'boolean',
+    ];
 
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function getExcerptAttribute()
@@ -35,10 +45,11 @@ class Post extends Model
         return $query->orderByDesc('created_at');
     }
 
-    public function scopeSearch($query, $keyword)
-    {
-        return $query->whereRaw('match(title,content) against (?)', $keyword);
+//    public function scopeSearch($query, $keyword)
+//    {
+////        return $query->whereRaw('match(title,content) against (?)', $keyword);
 //        return $query->where('title', 'like', '%' . $keyword . '%')
 //            ->orWhere('content', 'like', '%' . $keyword . '%');
-    }
+//    }
+
 }

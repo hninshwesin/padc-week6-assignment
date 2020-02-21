@@ -36,6 +36,8 @@ class PostRepository
         return Post::published()
             ->search($keyword)
             ->paginate(5);
+//        return Post::search($keyword)
+//            ->paginate(5);
     }
 
     public function guestPost()

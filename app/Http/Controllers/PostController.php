@@ -14,9 +14,7 @@ class PostController extends Controller
 {
     use Notify;
 
-    public function __construct(
-        PostRepository $repository,
-        PostService $service)
+    public function __construct(PostRepository $repository, PostService $service)
     {
         $this->repository = $repository;
         $this->service = $service;
@@ -29,23 +27,14 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-//        if($request->has('keyword')){
-//            $posts = $this->repository->searchPost($request->keyword);
-//        }else{
-//            if (auth()->guest()) {
-//                $posts = $this->repository->guestPost();;
-//            } else {
-//                $posts = $this->repository->memberPost();
-//            }
-//        }
-        if($request->has('query')){
-            //Search here
-        }
-
-        if (auth()->guest()) {
-            $posts = $this->repository->guestPost();
-        } else {
-            $posts = $this->repository->memberPost();
+        if($request->has('keyword')){
+            $posts = $this->repository->searchPost($request->keyword);
+        }else{
+            if (auth()->guest()) {
+                $posts = $this->repository->guestPost();;
+            } else {
+                $posts = $this->repository->memberPost();
+            }
         }
 
         return view('post.index', compact('posts'));
@@ -69,11 +58,11 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostSaveRequest $request)
+    public function store(PostCreateRequest $request)
     {
         $this->authorize('create', \App\Post::class);
 
-        $post = $this->service->make($request->validated());
+        $post = $this->service->make($request->validated(),\Auth::user());
 
         return redirect(route('post.show', $post->id));
     }

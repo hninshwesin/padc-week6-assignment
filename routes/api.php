@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('v1/login','Api\v1\LoginController@index');
+
+Route::prefix('v1/')->middleware('auth:api')->namespace('Api\v1')->group(function (){
+    Route::apiResource('post', 'PostController');
+
+    Route::apiResource('category', 'CategoryController');
+});
+
+
+

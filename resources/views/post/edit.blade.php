@@ -18,6 +18,7 @@
                 <radio-item name="is_published" @if($post->is_published) checked=1 @endif label="Yes" id="is_published_yes" value="1"></radio-item>
                 <radio-item name="is_published" @if(!$post->is_published) checked=1 @endif id="is_published_no" label="No" value="0"></radio-item>
             </form-group>
+            <categories-select value="{{$post->category_id}}"></categories-select>
             <button class='btn btn-primary'>Save</button>
             <a href="{{route('post.show',$post->id)}}" class='btn'>Cancel</a>
         </form>

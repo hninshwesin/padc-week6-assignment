@@ -24,6 +24,9 @@ Vue.component('text-input', require('./components/TextInput.vue').default);
 Vue.component('form-group', require('./components/FormGroup.vue').default);
 Vue.component('radio-item', require('./components/RadioItem.vue').default);
 Vue.component('textarea-input', require('./components/TextareaInput.vue').default);
+Vue.component('categories-select', require('./components/CategoriesSelect.vue').default);
+Vue.component('post-list', require('./components/PostList.vue').default);
+Vue.component('login-form', require('./components/LoginForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

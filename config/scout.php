@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    'driver' => env('SCOUT_DRIVER', 'elasticsearch'),
 
     /*
     |--------------------------------------------------------------------------
@@ -83,9 +83,18 @@ return [
     |
     */
 
-    'algolia' => [
-        'id' => env('ALGOLIA_APP_ID', '5X4FD8UQWU'),
-        'secret' => env('ALGOLIA_SECRET', '4beff6b4add0eab7ed396cbf17d3349e'),
+//    'algolia' => [
+//        'id' => env('ALGOLIA_APP_ID', '5X4FD8UQWU'),
+//        'secret' => env('ALGOLIA_SECRET', '12d6ec316c838621b1fcb7d60a1cb401'),
+//    ],
+
+    'elasticsearch' => [
+        'index' => env('ELASTICSEARCH_INDEX', 'posts'),
+        'config' => [
+            'hosts' => [
+                env('ELASTICSEARCH_HOST', 'localhost'),
+            ],
+        ],
     ],
 
 ];
